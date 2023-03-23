@@ -7,7 +7,7 @@ import {Box,Grid,Stack,Button } from '@mui/material';
 import {Form} from 'react-bootstrap';
 import FriendsList from '../Components/FriendsList';
 function Home(props) {
-    const { contract } = useContract("0x5F22431d133B0E5120b58D42A592B9529ed5Ae97");
+    const { contract } = useContract("0xa514eA1a6a2EB698C34F0A0712D8e57A43B4D820");
     const [user,setUser] = useState(null);
     const { data,  } = useContractRead(contract, "getAllUsers")
     const { mutateAsync: upload } = useStorageUpload();
@@ -16,6 +16,12 @@ function Home(props) {
         message:"",
         file:""
     })
+    useEffect(()=>{
+        const isAuth = localStorage.getItem("auth")
+    if(isAuth!=="true"){
+        window.location.replace('/')
+    }
+    },[])
     const [file, setFile] = useState();
         const authUser = ()=>{
             const authUser = JSON.parse(localStorage.getItem("user"))

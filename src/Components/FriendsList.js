@@ -1,14 +1,24 @@
-import React from 'react';
+import React,{useState,useEffect} from 'react';
 import {Button,Typography,Menu,MenuItem,Fade} from '@mui/material/';
 import { Center } from '@chakra-ui/react';
 export default function FriendsList(props) {
+    const [curUser,setCurUser] = useState(null)
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
-    const handleClick = (event) => {
+    useEffect(()=>{
+        const _from = JSON.parse(localStorage.getItem("user"))
+        setCurUser(_from[0])
+    },[curUser])
+    const handleClick = (event,index) => {
+    localStorage.setItem("selectedUser",JSON.stringify(props.users[index]))
     setAnchorEl(event.currentTarget);
     };
     const handleClose = () => {
     setAnchorEl(null);
+    };
+    const handleChatClose = () => {
+    setAnchorEl(null);
+    window.location.replace('/chats')
     };
 
     return (
@@ -21,7 +31,7 @@ export default function FriendsList(props) {
       </Typography>
         </Center>
         <ul>
-            {props.users.map(user=>{
+            {props.users.map((user,index)=>{
                 return (
             <li style={{listStyleType:"none"}}>
             <Button
@@ -29,10 +39,10 @@ export default function FriendsList(props) {
             aria-controls={open ? 'fade-menu' : undefined}
             aria-haspopup="true"
             aria-expanded={open ? 'true' : undefined}
-            onClick={handleClick}
+            onClick={(e)=>handleClick(e,index)}
             >
             <Typography variant="h6" gutterBottom>
-            {user[0]}
+            {(user[0]===curUser)?"":user[0]}
             </Typography>
             </Button>
             </li>
@@ -52,8 +62,7 @@ export default function FriendsList(props) {
         onClose={handleClose}
         TransitionComponent={Fade}
         >
-        <MenuItem onClick={handleClose}>chat</MenuItem>
-        <MenuItem onClick={handleClose}>send Currency</MenuItem>
+        <MenuItem onClick={handleChatClose}>chat</MenuItem>
         </Menu>
     </div>
   );

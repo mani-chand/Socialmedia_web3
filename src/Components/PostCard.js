@@ -3,7 +3,7 @@ import { useContract,MediaRenderer, useContractRead } from "@thirdweb-dev/react"
 import {Card,Typography,Avatar,CardHeader,CardContent,CardActions} from '@mui/material/';
 import { red } from '@mui/material/colors';
 export default function PostCard(props) {
-  const { contract } = useContract("0x5F22431d133B0E5120b58D42A592B9529ed5Ae97");
+  const { contract } = useContract("0xa514eA1a6a2EB698C34F0A0712D8e57A43B4D820");
   const { data, isLoading } = useContractRead(contract, "getAllPosts")
   return (
     <>

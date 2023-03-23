@@ -96,6 +96,13 @@ return (
             <Button
             style={{fontSize:18,margin:"0 7px",backgroundColor:"#fff",color:"black"}}
             variant="contained"
+            href="/home"
+            >
+            Home
+            </Button>
+            <Button
+            style={{fontSize:18,margin:"0 7px",backgroundColor:"#fff",color:"black"}}
+            variant="contained"
             href="/"
             onClick={handleLogOut}
             >

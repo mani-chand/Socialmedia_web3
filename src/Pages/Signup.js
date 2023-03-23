@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import Loader from './../Components/Loader.js'
 import {useAddress,useMetamask} from "@thirdweb-dev/react";
 import {Box,Stack,Typography,TextField,Button} from '@mui/material';
@@ -7,13 +7,19 @@ import Navbar from '../Components/Navbar';
 function Signup(props) {
     const connect =  useMetamask()
     const address = useAddress()
-    const { contract } = useContract("0x5F22431d133B0E5120b58D42A592B9529ed5Ae97");
+    const { contract } = useContract("0xa514eA1a6a2EB698C34F0A0712D8e57A43B4D820");
     const { mutateAsync: createUser, isLoading } = useContractWrite(contract, "createUser")
     const [user,setUser] = useState({
         name:"",
         email:"",
         password:""
     });
+    useEffect(()=>{
+        const isAuth = localStorage.getItem("auth")
+    if(isAuth==="true"){
+        window.location.replace('/home')
+    }
+    },[])
     const handleSubmit=async()=>{
         connect()
         console.log(user,address)
