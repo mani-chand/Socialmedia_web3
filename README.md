@@ -17,3 +17,5 @@ git clone https://github.com/mani-chand/socialmedia_web3.git
 - connect to Goerli network using metamask extention.
 
 **note : it may take time to signup or create a post or send a message use browser console.**
+
+**Project is also deployed at http://socialmedia-web3.web.app/**
